@@ -1,4 +1,5 @@
 import pygame
+from colors import Colors
 
 class Grid:
     def __init__(self):
@@ -10,7 +11,7 @@ class Grid:
         self.cell_size = 30
 
         # initialize list of colors
-        self.colors = self.get_cell_colors()
+        self.colors = Colors.get_cell_colors()
 
         # initialize grid (represented as a list of lists)
         self.grid = [
@@ -41,18 +42,6 @@ class Grid:
             for column in range(self.num_cols):
                 print(self.grid[row][column], end = " ")
             print()
-
-    def get_cell_colors(self):
-        gray = (32, 32, 32)
-        magenta = (255, 0, 127)
-        orange = (255, 128, 0)
-        lila = (153, 153, 255)
-        yellow = (255, 255, 0)
-        light_green = (102, 255, 102)
-        deep_green = (0, 153, 0)
-        intense_red = (255, 0, 0)
-
-        return [gray, magenta, orange, lila, yellow, light_green, deep_green, intense_red]
 
     def draw(self, screen):
         for row in range(self.num_rows):
