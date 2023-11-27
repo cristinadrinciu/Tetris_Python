@@ -1,6 +1,8 @@
 import pygame, sys
 from grid import Grid
 
+from blocks import *
+
 pygame.init()
 bgColor = (153, 204, 255)
 
@@ -12,13 +14,10 @@ pygame.display.set_caption("Python Tetris")
 # Initialize clock
 clock = pygame.time.Clock()
 
+# Initialize grid
 game_grid = Grid()
 
-
-game_grid.grid[0][0] = 1
-game_grid.grid[3][5] = 4
-game_grid.grid[17][8] = 7
-
+block = OBlock()
 
 game_grid.display_matrix()
 
@@ -34,7 +33,7 @@ while True:
     screen.fill(bgColor)
 
     game_grid.draw(screen)
-
+    block.draw(screen)
 
     # Update screen
     pygame.display.update()
