@@ -16,11 +16,32 @@ class Game:
         self.blocks.remove(block)
         return block
     
+    def lock_block(self):
+        tiles = self.current_block.get_cell_positions()
+        for position in tiles:
+            self.grid.grid[position.row][position.column] = self.current_block.id
+        
+        # Update current block
+        self.current_block = self.next_block
+
+        # Generate new next block
+        self.next_block = self.get_random_block()
+
+    # Check for collision of two or more blocks
+    def block_fits(self):
+        tiles = self.current_block.get_cell_positions()
+
+        for tile in tiles:
+            if self.grid.is_empty(tile.row, tile.column) == False:
+                return False
+
+        return True
+
     def move_left(self):
         self.current_block.move(0, -1)
 
-        # Check if block is inside the grid
-        if self.block_inside() == False:
+        # Check if block is inside the grid or if it fits (for collision)
+        if self.block_inside() == False or self.block_fits() == False:
             self.current_block.move(0, 1)
     
     def move_right(self):
@@ -33,15 +54,17 @@ class Game:
     def move_down(self):
         self.current_block.move(1, 0)
 
-        #  Check if block is inside the grid
-        if(self.block_inside() == False):
+        #  Check if block is inside the grid or if it fits (for collision)
+        if(self.block_inside() == False or self.block_fits() == False):
             self.current_block.move(-1, 0)
+            # If block is at bottom, lock it.
+            self.lock_block()
 
     def rotate(self):
         self.current_block.rotate()
 
-        # check if the block gets out of the grid during rotation
-        if self.block_inside() == False:
+        # Check if the block gets out of the grid during rotation and if it fits
+        if self.block_inside() == False or self.block_fits() == False:
             self.current_block.undo_rotation()
 
     def block_inside(self):

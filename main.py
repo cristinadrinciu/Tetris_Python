@@ -17,6 +17,12 @@ clock = pygame.time.Clock()
 # Initialize game object
 game = Game()
 
+# Create timer event (to update more frequently)
+GAME_UPDATE = pygame.USEREVENT
+
+# Trigger game update event every 200 ms
+pygame.time.set_timer(GAME_UPDATE, 200)
+
 # Game loop
 while True:
     # Handle events
@@ -35,11 +41,15 @@ while True:
                 game.move_down()
             if event.key == pygame.K_UP:
                 game.rotate()
+        
+        # Update movement every 200 ms
+        if event.type == GAME_UPDATE:
+            game.move_down()
 
     # Set background color
     screen.fill(bgColor)
     game.draw(screen)
-
+    
     # Update screen
     pygame.display.update()
 
