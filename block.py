@@ -24,6 +24,21 @@ class Block:
             moved_tiles.append(position)
         return moved_tiles
 
+    # create the rotate method for the block
+    def rotate(self):
+        # update rotation state
+        self.rotation_state += 1
+
+        # check if the rotation state has reached the maximum number of rotation states. If so, reset it
+        if self.rotation_state == len(self.cells):
+            self.rotation_state = 0
+
+    # create a method to undo rotation to use in case the block gets out of the grid during rotation
+    def undo_rotation(self):
+        self.rotation_state -= 1
+        if self.rotation_state == 0:
+            self.rotation_state = len(self.cells) - 1
+
     def draw(self, screen):
         tiles = self.get_cell_positions()
         for tile in tiles:

@@ -37,6 +37,13 @@ class Game:
         if(self.block_inside() == False):
             self.current_block.move(-1, 0)
 
+    def rotate(self):
+        self.current_block.rotate()
+
+        # check if the block gets out of the grid during rotation
+        if self.block_inside() == False:
+            self.current_block.undo_rotation()
+
     def block_inside(self):
 
         # Get the tiles of the current block
