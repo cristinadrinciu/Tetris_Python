@@ -33,17 +33,22 @@ while True:
 
         # Add the input controls here
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            # Restart the game whenever a key on the keyboard is pressed
+            if game.game_over == True:
+                game.game_over = False
+                game.reset()
+            if event.key == pygame.K_LEFT and game.game_over == False:
                 game.move_left()
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT and game.game_over == False:
                 game.move_right()
-            if event.key == pygame.K_DOWN:
+            if event.key == pygame.K_DOWN and game.game_over == False:
                 game.move_down()
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP and game.game_over == False:
                 game.rotate()
         
-        # Update movement every 200 ms
-        if event.type == GAME_UPDATE:
+        # Update movement every 200 ms only if the game is not over
+        # Don't let the user move the block if the game is over
+        if event.type == GAME_UPDATE and game.game_over == False:
             game.move_down()
 
     # Set background color
