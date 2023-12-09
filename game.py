@@ -8,6 +8,7 @@ class Game:
         self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
         self.current_block = self.get_random_block()
         self.next_block = self.get_random_block()
+        self.game_over = False
     
     def get_random_block(self):
         if len(self.blocks) == 0:
@@ -29,6 +30,24 @@ class Game:
 
         # Clear the full rows, if they are full and move the rest down 
         self.grid.clear_full_rows()
+        
+        # Check if the new block fits in the grid
+        if self.block_fits() == False:
+            # If the new block doesn't fit, we need to end the game
+            self.game_over = True
+
+    # Reset method to restart the game
+    def reset(self):
+        # Clear the grid
+        self.grid.reset()
+
+        # When the game ends, we need to select a new random current_block and a new next block from the list of blocks
+        self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
+
+        #Select a random block to be the current block
+        self.current_block = self.get_random_block()
+        self.next_block = self.get_random_block()
+
 
     # Check for collision of two or more blocks
     def block_fits(self):

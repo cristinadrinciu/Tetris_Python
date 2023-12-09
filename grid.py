@@ -84,6 +84,13 @@ class Grid:
                 self.move_row_down(row, completed)
         return completed
 
+    # Reset the grid
+    def reset(self):
+        # Set every value of the grid to 0
+        for row in range(self.num_rows):
+            for column in range(self.num_cols):
+                self.grid[row][column] = 0
+
     def draw(self, screen):
         for row in range(self.num_rows):
             for column in range(self.num_cols):
