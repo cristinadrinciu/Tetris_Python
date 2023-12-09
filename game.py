@@ -27,6 +27,9 @@ class Game:
         # Generate new next block
         self.next_block = self.get_random_block()
 
+        # Clear the full rows, if they are full and move the rest down 
+        self.grid.clear_full_rows()
+
     # Check for collision of two or more blocks
     def block_fits(self):
         tiles = self.current_block.get_cell_positions()
