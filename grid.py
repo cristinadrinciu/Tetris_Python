@@ -97,7 +97,8 @@ class Grid:
                 cell_value = self.grid[row][column]
 
                 # draw the pixel square, which is going to be invisible, as it only represents a guide for the game pieces
-                cell_rect = pygame.Rect(column * self.cell_size + 1, row * self.cell_size + 1, self.cell_size - 1, self.cell_size - 1)
+                cell_rect = pygame.Rect(column * self.cell_size + 15,
+                                        row * self.cell_size + 15, self.cell_size - 1, self.cell_size - 1)
                 
                 # call draw API
                 pygame.draw.rect(screen, self.colors[cell_value], cell_rect)
