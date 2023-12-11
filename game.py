@@ -9,6 +9,17 @@ class Game:
         self.current_block = self.get_random_block()
         self.next_block = self.get_random_block()
         self.game_over = False
+        self.score = 0
+
+    def update_score(self, lines_cleared, move_down_points):
+        # Atribute points to the score, based on the cleared lines
+        if lines_cleared == 1:
+            self.score += 100
+        elif lines_cleared == 2:
+            self.score += 300
+        elif lines_cleared == 3:
+            self.score += 500
+        self.score += move_down_points
     
     def get_random_block(self):
         if len(self.blocks) == 0:
@@ -29,7 +40,10 @@ class Game:
         self.next_block = self.get_random_block()
 
         # Clear the full rows, if they are full and move the rest down 
-        self.grid.clear_full_rows()
+        rows_cleared = self.grid.clear_full_rows()
+
+        # Update score
+        self.update_score(rows_cleared, 0)
         
         # Check if the new block fits in the grid
         if self.block_fits() == False:
@@ -47,6 +61,7 @@ class Game:
         #Select a random block to be the current block
         self.current_block = self.get_random_block()
         self.next_block = self.get_random_block()
+        self.score = 0
 
 
     # Check for collision of two or more blocks
