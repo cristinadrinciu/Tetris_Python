@@ -1,6 +1,7 @@
 from grid import Grid
 from blocks import *
 import random
+import pygame
 
 class Game:
     def __init__(self):
@@ -10,6 +11,13 @@ class Game:
         self.next_block = self.get_random_block()
         self.game_over = False
         self.score = 0
+        self.rotate_sound = pygame.mixer.Sound("Sounds/rotate.ogg")
+        self.clear_sound =  pygame.mixer.Sound("Sounds/clear.ogg")
+
+        pygame.mixer.music.load("Sounds/music.ogg")
+
+        # make the music loop indefinately
+        pygame.mixer.music.play(-1)
 
     def update_score(self, lines_cleared, move_down_points):
         # Atribute points to the score, based on the cleared lines
@@ -42,8 +50,11 @@ class Game:
         # Clear the full rows, if they are full and move the rest down 
         rows_cleared = self.grid.clear_full_rows()
 
-        # Update score
-        self.update_score(rows_cleared, 0)
+        if rows_cleared > 0:
+            # play the clear sound
+            self.clear_sound.play()
+            # Update score
+            self.update_score(rows_cleared, 0)
         
         # Check if the new block fits in the grid
         if self.block_fits() == False:
@@ -103,6 +114,9 @@ class Game:
         # Check if the block gets out of the grid during rotation and if it fits
         if self.block_inside() == False or self.block_fits() == False:
             self.current_block.undo_rotation()
+        else:
+            # if the rotation is valid, we need to play the sound
+            self.rotate_sound.play()
 
     def block_inside(self):
 
