@@ -117,4 +117,18 @@ class Game:
 
     def draw(self, screen):
         self.grid.draw(screen)
-        self.current_block.draw(screen)
+        self.current_block.draw(screen, 15, 15)
+
+        # check the id of the next block before it is drawn on the screen
+        #check if the next block is the I block
+        if self.next_block.id == 3:
+            # give the I block its own offset values
+            self.next_block.draw(screen, 255, 290)
+        # check if the next block is the O block
+        elif self.next_block.id == 4:
+            # give the O block its own offset values
+            self.next_block.draw(screen, 255, 280)
+        else:
+            # all the other blocks work well with the default offset
+            self.next_block.draw(screen, 270, 270)
+
