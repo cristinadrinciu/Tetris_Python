@@ -6,7 +6,6 @@ from blocks import *
 
 pygame.init()
 
-
 # Create title font
 title_font = pygame.font.SysFont("Arial", 30)
 
@@ -25,7 +24,7 @@ button_text = title_font.render("Switch", True, Colors.white)
 # (x, y, width, height)
 score_rect = pygame.Rect(320, 55, 170, 60)
 next_rect = pygame.Rect(320, 215, 170, 180)
-button = pygame.Rect(360, 500, 100, 60)
+button = pygame.Rect(355, 500, 100, 60)
 
 dayColor = (153, 204, 255)
 nightColor = (0, 0, 0)
@@ -46,8 +45,8 @@ game = Game()
 # Create timer event (to update more frequently)
 GAME_UPDATE = pygame.USEREVENT
 
-# Trigger game update event every 200 ms
-pygame.time.set_timer(GAME_UPDATE, 200)
+# Trigger game update event every 250 ms
+pygame.time.set_timer(GAME_UPDATE, 250)
 
 # Game loop
 while True:
