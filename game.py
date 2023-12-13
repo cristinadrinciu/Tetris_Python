@@ -145,4 +145,3 @@ class Game:
         else:
             # all the other blocks work well with the default offset
             self.next_block.draw(screen, 270, 270)
-

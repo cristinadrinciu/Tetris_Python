@@ -102,4 +102,3 @@ class Grid:
                 
                 # call draw API
                 pygame.draw.rect(screen, self.colors[cell_value], cell_rect)
-

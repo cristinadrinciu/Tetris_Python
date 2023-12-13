@@ -46,4 +46,3 @@ class Block:
                                     offset_y + tile.row * self.cell_size,
                                     self.cell_size - 1, self.cell_size - 1)
             pygame.draw.rect(screen, self.colors[self.id], tile_rect)
-
